@@ -47,11 +47,10 @@ This CRM provides:
 ## Screenshots
 Add screenshots under `docs/screenshots/` using the same file names:
 
-![Login Page](docs/screenshots/login.png)
-![Dashboard](docs/screenshots/dashboard.png)
-![Leads](docs/screenshots/leads.png)
-![Follow-ups](docs/screenshots/followups.png)
-![Opportunities](docs/screenshots/opportunities.png)
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/e892e02f-f54f-4de8-b4b6-b8a5955addd6" />
+<img width="1361" height="615" alt="image" src="https://github.com/user-attachments/assets/b01f6e80-8d61-44eb-87e5-932151a493d3" />
+<img width="1361" height="611" alt="image" src="https://github.com/user-attachments/assets/72e0bd92-6d3a-4344-a044-79970b3c94b9" />
+<img width="1363" height="612" alt="image" src="https://github.com/user-attachments/assets/b4d44ea2-31d2-4b59-8019-0d8d9baa7e22" />
 
 If images are not visible yet, place the PNG files in `docs/screenshots/` and refresh your Markdown preview.
 
