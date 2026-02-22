@@ -1,66 +1,199 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Smart CRM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Smart CRM is a role-based CRM web application built with Laravel.  
+It supports lead management, follow-up tracking, opportunity pipeline updates, bulk CSV imports, and in-app notifications.
 
-## About Laravel
+## Table of Contents
+- Overview
+- Tech Stack
+- Features
+- Screenshots
+- Authentication and Demo Credentials
+- Installation
+- Environment Setup
+- Database and Seeding
+- Running the Application
+- Project Structure
+- Roles and Access Rules
+- CSV Import Formats
+- Useful Commands
+- Troubleshooting
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Overview
+This CRM provides:
+- A dashboard for lead and sales insights.
+- Lead lifecycle management with scoring and follow-up planning.
+- Follow-up scheduling and status tracking.
+- Opportunity pipeline management by stage.
+- Notification polling and role-based access control.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
+- Backend: PHP 8+, Laravel 9
+- Frontend: Blade templates, TailwindCSS (CDN), jQuery
+- Charts and tables: Chart.js, DataTables
+- Build tool: Vite
+- Database: MySQL/MariaDB (Laravel Eloquent ORM + migrations)
+- Auth: Session-based Laravel authentication
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
+- Role-based login (`admin`, `sales_executive`)
+- Lead CRUD with filters and scoring
+- CSV import for Leads, Follow-ups, and Opportunities
+- Follow-up status updates (`pending`, `completed`, `missed`)
+- Opportunity stage updates
+- Dashboard KPI cards and charts
+- Notification dropdown with polling
 
-## Learning Laravel
+## Screenshots
+Add screenshots under `docs/screenshots/` using the same file names:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![Login Page](docs/screenshots/login.png)
+![Dashboard](docs/screenshots/dashboard.png)
+![Leads](docs/screenshots/leads.png)
+![Follow-ups](docs/screenshots/followups.png)
+![Opportunities](docs/screenshots/opportunities.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+If images are not visible yet, place the PNG files in `docs/screenshots/` and refresh your Markdown preview.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Authentication and Demo Credentials
+Seeded users from `database/seeders/DatabaseSeeder.php`:
 
-## Laravel Sponsors
+### Admin
+- Email: `admin@crm.local`
+- Password: `password`
+- Role: `admin`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Sales Executives
+- `alex@crm.local` / `password`
+- `maria@crm.local` / `password`
+- `ravi@crm.local` / `password`
 
-### Premium Partners
+> Note: Change these credentials before production use.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Installation
+1. Clone the repository.
+2. Install PHP dependencies:
+   ```bash
+   composer install
+   ```
+3. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+4. Create environment file:
+   ```bash
+   cp .env.example .env
+   ```
+5. Generate app key:
+   ```bash
+   php artisan key:generate
+   ```
 
-## Contributing
+## Environment Setup
+Update `.env` with your database connection:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```env
+APP_NAME="Smart CRM"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
 
-## Code of Conduct
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crm
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Database and Seeding
+Run migrations and seed demo data:
 
-## Security Vulnerabilities
+```bash
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+This creates users, sample leads, and related CRM demo records.
 
-## License
+## Running the Application
+Run backend and frontend in separate terminals:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan serve
+```
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:8000/login`.
+
+## Project Structure
+- `app/Http/Controllers/` - Feature controllers (Auth, Leads, Follow-ups, Opportunities, Dashboard)
+- `app/Models/` - Eloquent models
+- `app/Services/` - Domain logic (scoring, imports, notifications, opportunity automation)
+- `app/Http/Requests/` - Form request validation
+- `resources/views/` - Blade UI templates
+- `routes/web.php` - Web routes and role-protected endpoints
+- `database/migrations/` - Schema definitions
+- `database/seeders/DatabaseSeeder.php` - Demo credentials and sample data
+
+## Roles and Access Rules
+- `admin`
+  - Full CRM access
+  - Can delete leads
+  - Can broadcast notifications
+- `sales_executive`
+  - Access to assigned leads/follow-ups/opportunities
+  - Can update follow-up and opportunity progress for authorized records
+
+Access control is enforced in routes and controllers.
+
+## CSV Import Formats
+### Leads Import
+Route: `POST /leads/import`  
+Expected: CSV file (see lead import form hint in UI).
+
+### Follow-ups Import
+Route: `POST /follow-ups/import`  
+Columns:
+- `lead_id` (required)
+- `follow_up_date` (required, date)
+- `status` (optional: `pending`, `completed`, `missed`)
+- `notes` (optional)
+
+### Opportunities Import
+Route: `POST /opportunities/import`  
+Columns:
+- `name` (required)
+- `lead_id` (optional)
+- `assigned_user_id` (optional)
+- `estimated_value` (optional)
+- `probability` (optional, 0-100)
+- `expected_close_date` (optional, date)
+- `stage` (optional: `prospecting`, `proposal`, `negotiation`, `closed_won`, `closed_lost`)
+
+## Useful Commands
+- Run tests:
+  ```bash
+  php artisan test
+  ```
+- Clear caches:
+  ```bash
+  php artisan optimize:clear
+  ```
+- Build frontend assets:
+  ```bash
+  npm run build
+  ```
+
+## Troubleshooting
+- If styles/scripts are missing, ensure `npm run dev` is running.
+- If login fails with seeded credentials, rerun:
+  ```bash
+  php artisan migrate:fresh --seed
+  ```
+- If file upload/import fails, verify `upload_max_filesize` and `post_max_size` in PHP settings.
+
+---
+For feature changes, update this README with new routes, credentials, or module behavior so docs remain accurate.
